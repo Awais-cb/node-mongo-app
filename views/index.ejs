@@ -1,0 +1,58 @@
+<% include includes/header %>
+
+<div class="container">
+	<div class='row'>
+		<% if(errors != undefined){ %> 
+			<% errors.forEach(function(err) { %>
+			<h5 class="alert alert-danger"><%= err.msg %></h5>
+			<% }) %>
+		<%  } %>
+
+
+		<% if(result != undefined){ %> 
+			<h5>new record with first name <%= result.first_name %> added!</h5>
+		<%  } %>
+
+
+
+		<h1>Nodejs Expressjs app</h1>
+
+		<form action="/users/add" method="post" accept-charset="utf-8">
+			<label>First name: <input type="text" name="first_name" class="form-control"></label>
+			<label>Last name: <input type="text" name="last_name" class="form-control"></label>
+			<label>Email: <input type="text" name="email" class="form-control"></label>
+			<input type="submit" name="Submit" class="btn btn-primary">
+		</form>
+		<br>
+		<table class="table table-striped">
+			<caption>Users records</caption>
+			<thead>
+				<tr>
+					<th>_id</th>
+					<th>first name</th>
+					<th>last name</th>
+					<th>email</th>
+					<th>delete</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<% users.forEach(function(user){  %>
+
+				<tr>
+					<td><%= user._id %></td>
+					<td><%= user.first_name %></td>
+					<td><%= user.last_name %></td>
+					<td><%= user.email %></td>
+					<td><a href="#" class="btn btn-sm btn-danger deleteUser" data-id='<%= user._id %>' >Delete</a></td>
+				</tr>
+				<% }); %>
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+<% include includes/footer %>
+
